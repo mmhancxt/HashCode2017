@@ -13,9 +13,9 @@ using namespace std;
 void Simple::Run()
 {
     cout << "Start" << endl;
-    std::ofstream ofs ("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/outputs.txt", std::ofstream::out);
+    std::ofstream ofs ("/Users/YQF/Dev/HashCode2017/HashCode2017/outputs.txt", std::ofstream::out);
     vector<vector<int>>& pizza = loader.pizza;
-    vector<vector<bool>>& isTaken = loader.isTaken;
+    vector<vector<int>>& isTaken = loader.isTaken;
     
     using Point = pair<int,int>;
     

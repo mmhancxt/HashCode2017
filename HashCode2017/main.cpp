@@ -19,7 +19,7 @@ int main(int argc, const char * argv[]) {
 	//InputLoader loader("small.in");
 	//InputLoader loader("C:\\HashCode2017\\HashCode2017.vsproj\\HashCode2017\\Debug\\small.in");
 
-    InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/big.in");
+    InputLoader loader("/Users/YQF/Dev/HashCode2017/HashCode2017/big.in");
     Simple simple(loader);
     simple.Run();
     

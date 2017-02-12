@@ -117,7 +117,7 @@ private:
 				v.push_back(ingredient);
 			}
 			pizza.push_back(v);
-            isTaken.push_back(vector<bool>(line.size(), false));
+            isTaken.push_back(vector<int>(line.size(), false));
 		}
 
 	}
@@ -131,5 +131,5 @@ public:
 	int const_min_ingredient;
 	int const_max_cells_in_slice;
 	vector<vector<int>> pizza;
-    vector<vector<bool>> isTaken;
+    vector<vector<int>> isTaken;
 };

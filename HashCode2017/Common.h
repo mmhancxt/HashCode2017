@@ -30,7 +30,7 @@ static bool isValidPizza(std::vector< std::vector<int> > pizza, int r0, int c0, 
 }
 
 using namespace std;
-static void CutAndDump(ofstream& ofs, vector<vector<bool>>& isTaken, int r0, int c0, int r1, int c1)
+static void CutAndDump(ofstream& ofs, vector<vector<int>>& isTaken, int r0, int c0, int r1, int c1)
 {
     cout << "start cuntanddump" << endl;
     for (int i = r0 ; i <= r1; ++i)

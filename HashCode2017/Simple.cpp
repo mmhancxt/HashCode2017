@@ -7,6 +7,7 @@
 //
 
 #include "Simple.hpp"
+#include "Common.h"
 
 void Simple::Run()
 {
@@ -20,6 +21,18 @@ void Simple::Run()
         }
     }
     
+    using Point = pair<int,int>;
     
+    Point start = make_pair(0,0);
+    Point end = start;
+    while (start.first != -1)
+    {
+        end.second = end.second + 1;
+        if (isValidPizza(pizza, start.first, start.second, end.first, end.second, 1, 5))
+        {
+            CutAndDump(isTaken, start.first, start.second, end.first, end.second);
+        }
+        start = GetStartPoint();
+    }
     
 }

@@ -117,7 +117,7 @@ private:
 				v.push_back(ingredient);
 			}
 			pizza.push_back(v);
-			isTaken.push_back(vector<bool>(line.size(), false));
+            isTaken.push_back(vector<bool>(line.size(), false));
 		}
 
 	}

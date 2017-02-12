@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "InputLoader.h"
+#include "Simple.hpp"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
@@ -19,9 +19,9 @@ int main(int argc, const char * argv[]) {
 	//InputLoader loader("small.in");
 	//InputLoader loader("C:\\HashCode2017\\HashCode2017.vsproj\\HashCode2017\\Debug\\small.in");
 
-    InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/example.in");
+    InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/small.in");
+    Simple simple(loader);
+    simple.Run();
     
-    std::cout << "Hello, HashCode!\n";
-	
     return 0;
 }

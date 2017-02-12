@@ -91,4 +91,5 @@ public:
 	int const_min_ingredient;
 	int const_max_cells_in_slice;
 	vector<vector<int>> pizza;
+    vector<vector<boolean>> isTaken;
 };

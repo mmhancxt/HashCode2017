@@ -8,33 +8,43 @@
 
 #include "Simple.hpp"
 #include "Common.h"
+using namespace std;
 
 void Simple::Run()
 {
+    cout << "Start" << endl;
     vector<vector<int>>& pizza = loader.pizza;
     vector<vector<bool>>& isTaken = loader.isTaken;
-    for (vector<bool>& v : isTaken)
-    {
-        for (int i = 0; i < v.size(); i++)
-        {
-            v[i] = false;
-        }
-    }
     
     using Point = pair<int,int>;
     
     Point start = make_pair(0,0);
-    Point end = start;
+    Point end = make_pair(0,1);
     while (start.first != -1)
     {
-        end.second = end.second + 1;
-        if (isValidPizza(pizza, start.first, start.second, end.first, end.second, 1, 5))
+        cout << "start : " << start.first << "," << start.second << endl;
+        cout << "end : " << end.first << "," << end.second << endl;
+        if (isValidPizza(pizza, start.first, start.second, end.first, end.second, loader.const_min_ingredient, loader.const_max_cells_in_slice))
         {
             CutAndDump(isTaken, start.first, start.second, end.first, end.second);
+            start = GetStartPoint();
         }
-        start = GetStartPoint();
+        else
+        {
+            if (end.second == loader.const_column-1)
+            {
+                int row = start.first+1;
+                start = make_pair(row, 0);
+                end = make_pair(row, 1);
+            }
+            else
+            {
+                end.second = end.second + 1;
+            }
+        }
     }
     
+    cout << "End" << endl;
 }
 
 pair<int, int> Simple::GetStartPoint() {
@@ -47,5 +57,5 @@ pair<int, int> Simple::GetStartPoint() {
         }
     }
     
-    return make_pair(0,0);
+    return make_pair(-1,0);
 }

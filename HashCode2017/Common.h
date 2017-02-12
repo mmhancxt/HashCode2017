@@ -37,7 +37,6 @@ static void CutAndDump(ofstream& ofs, vector<vector<bool>>& isTaken, int r0, int
     {
         for (int j = c0; j <= c1; j++)
         {
-            cout << i << "." << j << endl;
             isTaken[i][j] = true;
         }
     }

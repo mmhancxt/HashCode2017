@@ -39,7 +39,6 @@ void Simple::Run()
                 start.second = end.second+1;
                 end.second = start.second+1;
             }
-            cout << "Next start is : " << start.first << "," << start.second << endl;
         }
         else
         {

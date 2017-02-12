@@ -30,21 +30,20 @@ static bool isValidPizza(std::vector< std::vector<int> > pizza, int r0, int c0, 
 }
 
 using namespace std;
-static void CutAndDump(vector<vector<bool>>& isTaken, int r0, int c0, int r1, int c1)
+static void CutAndDump(ofstream& ofs, vector<vector<int>>& isTaken, int r0, int c0, int r1, int c1)
 {
-    for (int i = 0 ; i < isTaken.size(); ++i)
+    cout << "start cuntanddump" << endl;
+    for (int i = r0 ; i <= r1; ++i)
     {
-        vector<bool> row = isTaken[i];
-        for (int j = 0; i < row[j]; j++)
+        for (int j = c0; j <= c1; j++)
         {
-            row[j] = true;
+            isTaken[i][j] = true;
         }
     }
+
+    cout << r0 << " " << c0 << " " << r1 << " " << c1 << endl;
     
-    filebuf fb;
-    fb.open("outputs.txt", std::ios::out);
-    ostream os(&fb);
-    os << r0 << " " << c0 << " " << r1 << " " << c1 << endl;
+    ofs << r0 << " " << c0 << " " << r1 << " " << c1 << endl;
 }
 
 #endif /* Common_h */

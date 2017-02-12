@@ -13,8 +13,9 @@ using namespace std;
 void Simple::Run()
 {
     cout << "Start" << endl;
+    std::ofstream ofs ("/Users/YQF/Dev/HashCode2017/HashCode2017/outputs.txt", std::ofstream::out);
     vector<vector<int>>& pizza = loader.pizza;
-    vector<vector<bool>>& isTaken = loader.isTaken;
+    vector<vector<int>>& isTaken = loader.isTaken;
     
     using Point = pair<int,int>;
     
@@ -22,12 +23,22 @@ void Simple::Run()
     Point end = make_pair(0,1);
     while (start.first != -1)
     {
-        cout << "start : " << start.first << "," << start.second << endl;
-        cout << "end : " << end.first << "," << end.second << endl;
+        if (end.first > loader.const_row)
+            break;
         if (isValidPizza(pizza, start.first, start.second, end.first, end.second, loader.const_min_ingredient, loader.const_max_cells_in_slice))
         {
-            CutAndDump(isTaken, start.first, start.second, end.first, end.second);
-            start = GetStartPoint();
+            CutAndDump(ofs, isTaken, start.first, start.second, end.first, end.second);
+            if (end.second >= loader.const_column-2)
+            {
+                int row = start.first+1;
+                start = make_pair(row, 0);
+                end = make_pair(row, 1);
+            }
+            else
+            {
+                start.second = end.second+1;
+                end.second = start.second+1;
+            }
         }
         else
         {
@@ -44,6 +55,7 @@ void Simple::Run()
         }
     }
     
+    ofs.close();
     cout << "End" << endl;
 }
 

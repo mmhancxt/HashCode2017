@@ -11,14 +11,19 @@
 
 #include <stdio.h>
 #include "InputLoader.h"
+#include <pair>
 
-void Simple::Run()
+class Simple
 {
-    InputLoader loader;
-    vector<vector<int>>& pizza = loader.pizza;
+public:
+    Simple(InputLoader& input) : loader(input)
+    {}
     
-    vector<vector
+    pair<int,int> GetStartPoint();
+    void Run();
     
-}
+    InputLoader& loader;
+};
+
 
 #endif /* Simple_hpp */

@@ -8,7 +8,18 @@
 
 #include "Simple.hpp"
 
-class Simple
+void Simple::Run()
 {
-    void Run();
-};
+    vector<vector<int>>& pizza = loader.pizza;
+    vector<vector<bool>>& isTaken = loader.isTaken;
+    for (vector<bool>& v : isTaken)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            v[i] = false;
+        }
+    }
+    
+    
+    
+}

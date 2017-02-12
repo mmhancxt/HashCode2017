@@ -11,10 +11,13 @@
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/example.in");
-    
-    std::cout << "Hello, HashCode!\n";
-	InputLoader loader;
-	loader.const_column;
+    //InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/example.in");
+    //
+    //std::cout << "Hello, HashCode!\n";
+	//InputLoader loader;
+	//loader.const_column;
+	//InputLoader loader("small.in");
+	InputLoader loader("C:\\HashCode2017\\HashCode2017.vsproj\\HashCode2017\\Debug\\small.in");
+
     return 0;
 }

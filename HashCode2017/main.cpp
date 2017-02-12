@@ -7,9 +7,11 @@
 //
 
 #include <iostream>
+#include "InputLoader.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, HashCode!\n";
+    InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/example.in");
+    
     return 0;
 }

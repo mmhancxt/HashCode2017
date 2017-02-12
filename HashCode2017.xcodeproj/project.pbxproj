@@ -25,6 +25,12 @@
 /* Begin PBXFileReference section */
 		25A0FFB41E4940F500195591 /* HashCode2017 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HashCode2017; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A0FFB71E4940F500195591 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		25A0FFBE1E50A1A900195591 /* InputLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputLoader.h; sourceTree = "<group>"; };
+		25A0FFBF1E50A1A900195591 /* Output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Output.h; sourceTree = "<group>"; };
+		25A0FFC21E50A24900195591 /* big.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = big.in; sourceTree = "<group>"; };
+		25A0FFC31E50A24900195591 /* example.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.in; sourceTree = "<group>"; };
+		25A0FFC41E50A24900195591 /* medium.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medium.in; sourceTree = "<group>"; };
+		25A0FFC51E50A24900195591 /* small.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = small.in; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +63,23 @@
 		25A0FFB61E4940F500195591 /* HashCode2017 */ = {
 			isa = PBXGroup;
 			children = (
+				25A0FFC11E50A23000195591 /* inputs */,
+				25A0FFBE1E50A1A900195591 /* InputLoader.h */,
+				25A0FFBF1E50A1A900195591 /* Output.h */,
 				25A0FFB71E4940F500195591 /* main.cpp */,
 			);
 			path = HashCode2017;
+			sourceTree = "<group>";
+		};
+		25A0FFC11E50A23000195591 /* inputs */ = {
+			isa = PBXGroup;
+			children = (
+				25A0FFC21E50A24900195591 /* big.in */,
+				25A0FFC31E50A24900195591 /* example.in */,
+				25A0FFC41E50A24900195591 /* medium.in */,
+				25A0FFC51E50A24900195591 /* small.in */,
+			);
+			name = inputs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +229,8 @@
 		25A0FFBC1E4940F500195591 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"HEADER_SEARCH_PATHS[arch=*]" = "/Users/Xavier/Programs/c++/boost_1_60_0";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "/Users/Xavier/Programs/c++/boost_1_60_0/libs";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;

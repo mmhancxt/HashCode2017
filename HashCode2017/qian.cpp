@@ -8,14 +8,13 @@
 
 #include <iostream>
 #include <vector>
-const int L = 1;
-const int H = 6;
+#include "InputLoader.h"
 
 // 1 tomator 0 muschroom
 
 
 
-bool isValid(const std::vector< std::vector<int> >& pizza, int r0, int c0, int r1, int c1){
+bool isValid(const std::vector< std::vector<int> >& pizza, int r0, int c0, int r1, int c1, int L, int H){
 	if ((c1-c0+1)*(r1-r0+1)>H)
 		return false;
 	int count_t = 0;
@@ -34,14 +33,14 @@ bool isValid(const std::vector< std::vector<int> >& pizza, int r0, int c0, int r
 
 }
 
-int getMaxCut(const std::vector< std::vector<int> >& pizza, int r0, int c0, int r1, int c1){
+int getMaxCut(const std::vector< std::vector<int> >& pizza, int r0, int c0, int r1, int c1, int L, int H){
 	int sum = 0;
 	int area =(c1-c0+1)*(r1-r0+1);
 
 	//if part small enough, check if is valid
-	if(isValid(pizza,r0,c0,r1,c1))
+	if(isValid(pizza,r0,c0,r1,c1, L, H))
 		sum = area;
-	if(area <= H && !isValid(pizza,r0,c0,r1,c1))
+	if(area <= H && !isValid(pizza,r0,c0,r1,c1, L, H))
 		sum = 0;
 	if (area > H){
 		for(int i = r0; i <= r1; i++)
@@ -50,20 +49,21 @@ int getMaxCut(const std::vector< std::vector<int> >& pizza, int r0, int c0, int 
 				int count2 = 0;
 				int count3 = 0;
 				int count4 = 0;
-				count1 = getMaxCut(pizza, r0, c0, i, j);
+				if(i==r1&&j==c1)
+					break;
+				count1 = getMaxCut(pizza, r0, c0, i, j, L, H);
 				if(i+1<=r1)
-					count2 = getMaxCut(pizza, i+1, c0, r1, j);
+					count2 = getMaxCut(pizza, i+1, c0, r1, j, L, H);
 				if(j+1 <=c1)
-					count3 = getMaxCut(pizza, r0, j+1, i, c1);
+					count3 = getMaxCut(pizza, r0, j+1, i, c1, L, H);
 				if(i+1<=r1 && j+1 <=c1)
-					count4 = getMaxCut(pizza, i+1, j+1, r1, c1);
+					count4 = getMaxCut(pizza, i+1, j+1, r1, c1, L, H);
 				int temp_sum = count1 + count2 + count3 + count4;
 			    //std::cout<<count1<<" "<<count2<<" "<<count3<<" "<<count4<<std::endl;
 				sum = (sum > temp_sum)?sum:temp_sum;
+
 			}
 	}
-    std::cout<<"pizza cut"<<r0<<" "<<c0<<" "<<r1<<" "<<c1<<std::endl;
-    std::cout<<"pizza part "<<sum<<std::endl;
 
     return sum;
 
@@ -72,9 +72,11 @@ int getMaxCut(const std::vector< std::vector<int> >& pizza, int r0, int c0, int 
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::cout << "Hello, HashCode!\n";
-    std::vector< std::vector<int> > pizza = {{1, 1, 1, 1, 1},{1, 0, 0, 0, 1},{1,1, 1, 1, 1}};
+    InputLoader loader("/home/qian/HashCode2017/HashCode2017/small.in");
 
-    int res = getMaxCut(pizza,0,0,2,2);
+    //std::vector< std::vector<int> > pizza = {{1, 1, 1, 1, 1},{1, 0, 0, 0, 1},{1,1, 1, 1, 1}};
+
+    int res = getMaxCut(loader.pizza,0,0,loader.const_row,loader.const_column, loader.const_min_ingredient, loader.const_max_cells_in_slice);
     std::cout<<"Max num is "<<res<<std::endl;
     return 0;
 }

@@ -20,6 +20,17 @@ void Simple::Run()
         }
     }
     
+}
+
+pair<int, int> Simple::GetStartPoint() {
+    int m = loader.const_row, n = loader.const_column;
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            if (!loader.isTaken[i][j]) return make_pair(i, j);
+        }
+    }
     
-    
+    return make_pair(0,0);
 }

@@ -14,7 +14,6 @@ int main(int argc, const char * argv[]) {
     InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/example.in");
     
     std::cout << "Hello, HashCode!\n";
-	InputLoader loader;
-	loader.const_column;
+	
     return 0;
 }

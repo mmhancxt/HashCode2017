@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "InputLoader.h"
-#include <pair>
+
 
 class Simple
 {

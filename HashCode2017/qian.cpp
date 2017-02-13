@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include "InputLoader.h"
+#include <cmath>
 
 // 1 tomator 0 muschroom
 
@@ -103,22 +104,48 @@ return_stuff getMaxCut(const std::vector< std::vector<int> >& pizza, int r0, int
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::cout << "Hello, HashCode!\n";
-    InputLoader loader("/home/qian/HashCode2017/HashCode2017/medium.in");
+    //InputLoader loader("C:\\HashCode2017\\HashCode2017.vsproj\\HashCode2017\\Debug\\medium.in");
+    //InputLoader loader("C:\\HashCode2017\\HashCode2017.vsproj\\HashCode2017\\Debug\\big.in");
+    InputLoader loader("C:\\HashCode2017\\HashCode2017.vsproj\\HashCode2017\\Debug\\input_7.txt");
 
     //std::vector< std::vector<int> > pizza = {{1, 1, 1, 1, 1},{1, 0, 0, 0, 1},{1,1, 1, 1, 1}};
-    int size = 7;
+    int size = 8;
     int value = 0;
     std::vector<cut_path_point> path;
-    for(int i = 0; i < loader.const_row/size;i++)
-        for(int j = 0; j < loader.const_column/size;j++){
-        	std::cout<<i*size<<","<<j*size<<std::endl;
-        	return_stuff res = getMaxCut(loader.pizza,i*size,j*size,(i+1)*size-1,(j+1)*size-1, loader.const_min_ingredient, loader.const_max_cells_in_slice);
+	int rowSize = std::ceil(double(loader.const_row) / size);
+	int colSize = std::ceil(double(loader.const_column) / size);
+	for (int i = 0; i < rowSize; i++)
+		for (int j = 0; j < colSize; j++){
+        //for(int j = 0; j < 1;j++){
+			std::cout << i*size << "," << j*size << std::endl;
+			return_stuff res;
+			if (i == rowSize-1 && j == colSize-1)
+			{
+				res = getMaxCut(loader.pizza, i*size, j*size, loader.const_row - 1, loader.const_column - 1, loader.const_min_ingredient, loader.const_max_cells_in_slice);
+			}
+			else if(i == rowSize-1)
+			{
+				res = getMaxCut(loader.pizza, i*size, j*size, loader.const_row - 1, (j + 1)*size - 1, loader.const_min_ingredient, loader.const_max_cells_in_slice);
+			}
+			else if (j == colSize-1)
+			{
+				res = getMaxCut(loader.pizza, i*size, j*size, (i + 1)*size - 1, loader.const_column - 1, loader.const_min_ingredient, loader.const_max_cells_in_slice);
+			}
+			else
+			{
+				res = getMaxCut(loader.pizza, i*size, j*size, (i + 1)*size - 1, (j + 1)*size - 1, loader.const_min_ingredient, loader.const_max_cells_in_slice);
+			}
         	value+= res.value;
         	path.insert(path.end(),res.cut_path.begin(),res.cut_path.end());
         }
-	std::cout<<path.size()<<std::endl;
+	std::cout << value << std::endl;
+	ofstream f("C:\\HashCode2017\\HashCode2017.vsproj\\HashCode2017\\Debug\\test2.txt");
+	f<<path.size()<<std::endl;
     for(int i = 0; i< path.size();i++)
-        std::cout<<path[i].r0<<" "<<path[i].c0<<" "<<path[i].r1<<" "<<path[i].c1<<std::endl;
+        f<<path[i].r0<<" "<<path[i].c0<<" "<<path[i].r1<<" "<<path[i].c1<<std::endl;
+	f.close();
+	//int i;
+	//std::cin >> i;
     return 0;
 }
 

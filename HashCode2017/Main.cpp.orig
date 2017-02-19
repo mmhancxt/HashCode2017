@@ -1,0 +1,32 @@
+#include <iostream>
+#include "InputLoader.h"
+#include "SimpleOrder.h"
+#include "FindWareHouses.h"
+#include "Greedy.h"
+using namespace std;
+
+int main()
+{
+   InputLoader loader;
+<<<<<<< 174781121e25632106fe2ebf36cecc361836eb3d
+   //loader.LoadFromFile("D:\\Codes\\HashCode2017\\HashCode2017\\input\\busy_day.in");
+   loader.LoadFromFile("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/input/busy_day.in");
+   //std::vector<Order> simple_order = find_one_drone_order(loader);
+   //for (int i = 0; i < simple_order.size(); i++) {
+	//   cout << "order " <<i<<":" << simple_order[i].id << ", (" << simple_order[i].deliverPosition.x << "," << simple_order[i].deliverPosition.y << ")"<< endl;
+   //}
+   //cout << "delivery" << endl;
+=======
+   loader.LoadFromFile("D:\\Codes\\HashCode2017\\HashCode2017\\input\\busy_day.in");
+//    loader.LoadFromFile("/Users/YQF/Dev/HashCode2017/HashCode2017/input/busy_day.in");
+   std::vector<Order> simple_order = find_one_drone_order(loader);
+   for (int i = 0; i < simple_order.size(); i++) {
+	   cout << "order " <<i<<":" << simple_order[i].id << ", (" << simple_order[i].deliverPosition.x << "," << simple_order[i].deliverPosition.y << ")"<< endl;
+   }
+   cout << "delivery" << endl;
+>>>>>>> test(main): add input file busy_day.in
+
+   Greedy g(loader);
+   g.Run();
+   return 0;
+}

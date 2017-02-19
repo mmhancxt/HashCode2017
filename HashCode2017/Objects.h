@@ -39,12 +39,14 @@ enum Status
     COMPLETED
 };
 
-struct Order
+class Order
 {
 	int id;
-    Status status;
+   Status status;
 	Position deliverPosition;
 	map<int, int> purchasedProducts;
+   int nextProductToDeliver;
+   int wareHouseIdToLoad;
 };
 
 enum DroneStatus
@@ -72,5 +74,5 @@ struct Drone
     DroneStatus nextAction;
     DroneStatus status;
     Position position;
-    map<int, int> goods;
+    map<int, int> gods;
 };

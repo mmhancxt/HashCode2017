@@ -180,5 +180,5 @@ public:
 	int const_droneNum;
 	int const_totalTurns;
 	int const_maxDroneLoad;
-    int const_lightestProduct;
+   int const_lightestProduct;
 };

@@ -1,9 +1,10 @@
 #include <iostream>
-#include "InputLoader.h"
+#include "Greedy.cpp"
 using namespace std;
 
 int main()
 {
-   InputLoader loader;
-   cout << "delivery" << endl;
+   Greedy g;
+   g.Run();
+   return 0;
 }

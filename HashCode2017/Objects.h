@@ -7,13 +7,22 @@
 #include <memory>
 #include <map>
 #include <math.h>
+#include <vector>
 
 using namespace std;
+
+enum Status
+{
+    UNPROCESSED,
+    INDELIVERING,
+    COMPLETED
+};
 
 struct Product
 {
 	int id;
 	int weight;
+	Status status;
 };
 
 struct Position
@@ -32,19 +41,13 @@ struct WareHouse
 	}
 };
 
-enum Status
-{
-    UNPROCESSED,
-    INDELIVERING,
-    COMPLETED
-};
-
 struct Order
 {
 	int id;
-    Status status;
+	Status status;
 	Position deliverPosition;
-	map<int, int> purchasedProducts;
+	//map<int, int> purchasedProducts;
+	vector<Product> purchasedProducts;
 };
 
 enum DroneStatus

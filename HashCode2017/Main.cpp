@@ -10,6 +10,7 @@ int main()
 	loader.LoadFromFile("D:\\Codes\\HashCode2017\\HashCode2017\\input\\busy_day.in");
 	for (int i = 0; i < 10; i++) {
 		vector<vector<int>> ret = GetWareHouseOperations(loader.orders[i], loader);
+		cout << "cost: " << getApproximateCost(loader.orders[i], loader, ret) << endl;
 		for (int j = 0; j < ret.size(); j++)
 			cout << "warehouse " << ret[j][0] << " get " << ret[j][1] << " quatity " << ret[j][2] << endl;;
 	}

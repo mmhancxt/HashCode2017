@@ -5,9 +5,6 @@ using namespace std;
 
 int main()
 {
-   Greedy g;
-   g.Run();
-
    InputLoader loader;
    loader.LoadFromFile("D:\\Codes\\HashCode2017\\HashCode2017\\input\\busy_day.in");
    std::vector<Order> simple_order = find_one_drone_order(loader);
@@ -15,5 +12,9 @@ int main()
 	   cout << "order " <<i<<":" << simple_order[i].id << ", (" << simple_order[i].deliverPosition.x << "," << simple_order[i].deliverPosition.y << ")"<< endl;
    }
    cout << "delivery" << endl;
+
+   Greedy g(loader);
+   g.Run();
+
    std::cin.get();
 }

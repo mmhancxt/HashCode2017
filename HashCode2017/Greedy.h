@@ -3,12 +3,12 @@
 class Greedy
 {
 public:
-   Greedy(InputLoader& input) : input(loader)
+   Greedy(InputLoader& input) : loader(input)
    {
       loader.LoadFromFile("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/input/busy_day.in");
    }
 
-   void CalculateOrderPoints(vecotr<Order>& orders)
+   void CalculateOrderPoints(vector<Order>& orders)
    {
           
    }
@@ -18,7 +18,10 @@ public:
       cout << dId << " L " << wId << " " << pId << " " << pNb << endl;
       for (Product& p : order.purchasedProducts)
       {
-         if (p.Status == 
+         if (p.id == pId && p.status ==  UNPROCESSED)
+         {
+            p.status = INDELIVERING;
+         }
       }
    }
 

@@ -41,15 +41,9 @@ struct WareHouse
 	}
 };
 
-enum Status
-{
-    UNPROCESSED,
-    INDELIVERING,
-    COMPLETED
-};
-
 class Order
 {
+public:
 	int id;
    Status status;
 	Position deliverPosition;
@@ -59,6 +53,7 @@ class Order
    
    int GetUndeliveredProduct(int pId)
    {
+      return -1;
    }
 };
 

@@ -115,5 +115,5 @@ int getApproximateCost(Order& od, InputLoader& input, vector<vector<int>>& strat
 int GetRequiredTurns(Drone& d, Order& od, InputLoader& input) {
 	if (d.status != COMPLETED) //only consider currently idle drone
 		return -1;
-
+    return 0;
 }

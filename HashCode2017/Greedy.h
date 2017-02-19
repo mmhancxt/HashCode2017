@@ -11,9 +11,10 @@ public:
 
    void CalculateOrderPoints(vector<Order>& orders)
    {
-      for (Order& order : orders)
-      {
-      }
+      std::sort(orders.begin(), orders.end(), [](const Order& o1, const Order& o2)
+            {
+               return o1.points > o2.points;
+            });
    }
 
    void Load(WareHouse& house, Drone& drone, int wId, int pId, int pNb, Order& order, int current)
@@ -27,14 +28,16 @@ public:
             house.availableProducts[pId]--;
          }
       }
-      drone.status = INORDER;
+      drone.status = INWAREHOUSE;
       int dis = GetDistance(drone.position, house.position);
       drone.nextUsableTurn = current + dis + 1;
+      drone.orderToDeliver = order.id;
    }
 
-   void Deliver(Drone& drone, Order& order, int pId, int pNb, int current)
+   void Deliver(Drone& drone, int current)
    {
-      cout << drone.id << " D " << order.id << " " << pId << " " << pNb << endl;
+      Order& order = loader.orders[drone.orderToDeliver];
+      cout << drone.id << " D " << order.id << " " << order.nextProductToDeliver << " " << drone.gods[order.nextProductToDeliver] << endl;
       for (Product& p : order.purchasedProducts)
       {
          if (p.id == pId && p.status == INDELIVERING)
@@ -42,7 +45,7 @@ public:
             p.status = COMPLETED;
          }
       }
-      drone.
+      drone.status = INORDER; 
    }
 
    void Run()
@@ -55,17 +58,25 @@ public:
          for (int i = 0 ; i < loader.const_droneNum; i++)
          {
             Drone& drone = loader.drones[i];
-            if (drone.nextUsableTurn == current && drone.status != INORDER)
+            if (drone.nextUsableTurn == current)
             {
-               CalculateOrderPoints(orders);      
-               Order& orderToDeliver = orders[0];
-               int pId = orderToDeliver.nextProductToDeliver;
-               int wId = orderToDeliver.wareHouseIdToLoad;
-               int pNb = orderToDeliver.GetUnprocessedProductNumber(pId);
-               int availableCap = loader.const_maxDroneLoad;
-               WareHouse& wh = loader.warehouses[wId];
-               int nb = std::min(std::min(availableCap, pNb), wh.availableProducts[pId]);
-               Load(wh, drone.id, wId, pId, nb, orderToDeliver, current);
+               if (drone.status == INORDER)
+               {
+                  CalculateOrderPoints(orders);      
+                  Order& orderToDeliver = orders[0];
+                  int pId = orderToDeliver.nextProductToDeliver;
+                  int wId = orderToDeliver.wareHouseIdToLoad;
+                  int pNb = orderToDeliver.GetUnprocessedProductNumber(pId);
+                  int availableCap = loader.const_maxDroneLoad;
+                  WareHouse& wh = loader.warehouses[wId];
+                  int nb = std::min(std::min(availableCap, pNb), 
+                        wh.availableProducts[pId]);
+                  Load(wh, drone.id, wId, pId, nb, orderToDeliver, current);
+               }
+               else if (drone.status == INWAREHOUSE)
+               {
+                  Deliver(drone, current);
+               }
             }
          }
          current++;

@@ -86,6 +86,31 @@ vector<vector<int>> GetWareHouseOperations(Order& od, InputLoader& input) {
 	}
 	return retrieve_strategy;
 }
+
+int getApproximateCost(Order& od, InputLoader& input, vector<vector<int>>& strategy) {
+	int cost = 0;
+	int cur_weight = 0;
+	for (int i = 0; i < strategy.size(); i++) {
+		WareHouse wh = input.warehouses[strategy[i][0]];
+		if (i != 0 && cur_weight == 0) {
+			cost += sqrt(pow(wh.position.x - od.deliverPosition.x, 2) + pow(wh.position.y - od.deliverPosition.y, 2));
+		}
+		int prod_weight = input.products[strategy[i][1]].weight;
+		int prod_count = strategy[i][2];
+		cur_weight += prod_count * prod_weight;
+		//cout << "ccurent weight " << cur_weight << endl;
+		if (cur_weight > input.const_maxDroneLoad) {
+			cost += sqrt(pow(wh.position.x - od.deliverPosition.x, 2) + pow(wh.position.y - od.deliverPosition.y, 2));
+			cur_weight = 0;
+		}
+		if (cur_weight < input.const_maxDroneLoad && i == strategy.size() - 1) {
+			cost += sqrt(pow(wh.position.x - od.deliverPosition.x, 2) + pow(wh.position.y - od.deliverPosition.y, 2));
+
+		}
+	}
+
+	return cost;
+}
 //Compute the minimally required turns for one drone to serve an order 
 int GetRequiredTurns(Drone& d, Order& od, InputLoader& input) {
 	if (d.status != COMPLETED) //only consider currently idle drone

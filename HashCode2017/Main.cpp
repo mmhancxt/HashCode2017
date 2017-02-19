@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Greedy.cpp"
+#include "Greedy.h"
 #include "SimpleOrder.h"
 using namespace std;
 

@@ -16,7 +16,10 @@ public:
    void Load(int dId, int wId, int pId, int pNb, Order& order)
    {
       cout << dId << " L " << wId << " " << pId << " " << pNb << endl;
-      
+      for (Product& p : order.purchasedProducts)
+      {
+         if (p.Status == 
+      }
    }
 
    void Run()

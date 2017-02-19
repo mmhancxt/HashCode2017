@@ -77,6 +77,7 @@ public:
 					house.availableProducts[j] = productQty;
 				}
 				warehouses.push_back(house);
+				ss.clear();
 			}
 			ss.clear();
 

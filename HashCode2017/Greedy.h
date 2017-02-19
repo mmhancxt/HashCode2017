@@ -1,4 +1,5 @@
 #include "InputLoader.h"
+#include <algorithm>
 
 class Greedy
 {
@@ -39,7 +40,7 @@ public:
             Order& orderToDeliver = orders[0];
             int pId = orderToDeliver.nextProductToDeliver;
             int wId = orderToDeliver.wareHouseIdToLoad;
-            int pNb = orderToDeliver.GetUndeliveredProduct(pId);
+            int pNb = orderToDeliver.GetUnprocessedProductNumber(pId);
             int availableCap = loader.const_maxDroneLoad;
             while (availableCap > 0)
             {

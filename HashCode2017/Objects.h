@@ -8,6 +8,7 @@
 #include <map>
 #include <math.h>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -51,9 +52,12 @@ public:
    int nextProductToDeliver;
    int wareHouseIdToLoad;
    
-   int GetUndeliveredProduct(int pId)
+   // count unprocessed product given by an product id
+   int GetUnprocessedProductNumber(int productId)
    {
-      return -1;
+	   return std::count_if(purchasedProducts.cbegin(), purchasedProducts.cend(),
+		   [productId](const Product& p) { return p.id == productId && p.status == Status::UNPROCESSED; }
+	   );
    }
 };
 

@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
    InputLoader loader;
-<<<<<<< 174781121e25632106fe2ebf36cecc361836eb3d
+<<<<<<< 5d894fb9d7b8faa9688033c75b78902af3fcd30f
    //loader.LoadFromFile("D:\\Codes\\HashCode2017\\HashCode2017\\input\\busy_day.in");
    loader.LoadFromFile("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/input/busy_day.in");
    //std::vector<Order> simple_order = find_one_drone_order(loader);
@@ -16,17 +16,26 @@ int main()
 	//   cout << "order " <<i<<":" << simple_order[i].id << ", (" << simple_order[i].deliverPosition.x << "," << simple_order[i].deliverPosition.y << ")"<< endl;
    //}
    //cout << "delivery" << endl;
+
+   Greedy g(loader);
+   g.Run();
+   return 0;
 =======
-   loader.LoadFromFile("D:\\Codes\\HashCode2017\\HashCode2017\\input\\busy_day.in");
-//    loader.LoadFromFile("/Users/YQF/Dev/HashCode2017/HashCode2017/input/busy_day.in");
+//   loader.LoadFromFile("D:\\Codes\\HashCode2017\\HashCode2017\\input\\busy_day.in");
+    loader.LoadFromFile("/Users/YQF/Dev/HashCode2017/HashCode2017/input/busy_day.in");
    std::vector<Order> simple_order = find_one_drone_order(loader);
    for (int i = 0; i < simple_order.size(); i++) {
 	   cout << "order " <<i<<":" << simple_order[i].id << ", (" << simple_order[i].deliverPosition.x << "," << simple_order[i].deliverPosition.y << ")"<< endl;
    }
    cout << "delivery" << endl;
->>>>>>> test(main): add input file busy_day.in
 
-   Greedy g(loader);
-   g.Run();
-   return 0;
+//   Greedy g(loader);
+//   g.Run();
+
+    
+    auto commands = loadAndDeliverSimpleOrders(loader, simple_order);
+    outputCommands(commands);
+    
+   std::cin.get();
+>>>>>>> feat(simple order): deliver simple orders
 }

@@ -51,6 +51,7 @@ public:
 	vector<Product> purchasedProducts;
    int nextProductToDeliver;
    int wareHouseIdToLoad;
+   int points;
    
    // count unprocessed product given by an product id
    int GetUnprocessedProductNumber(int productId)

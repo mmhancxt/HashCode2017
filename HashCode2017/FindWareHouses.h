@@ -3,7 +3,7 @@
 #include "Objects.h"
 
 // Orders that cannot be fulfilled by one warehouse will return -1
-vector<vector<int>> GetClosestWareHouseIndexWithAvailableProducts(Order& od, InputLoader& input) {
+vector<vector<int>> GetWareHouseOperations(Order& od, InputLoader& input) {
 	std::vector<WareHouse> sorted_warehouses(input.warehouses);
 
 	cout << "ware " << sorted_warehouses.size() << endl;

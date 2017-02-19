@@ -41,6 +41,7 @@ public:
 				Product product;
 				product.id = i;
 				ss >> product.weight;
+				product.status = UNPROCESSED;
                 if (product.weight < const_lightestProduct)
                 {
                     const_lightestProduct = product.weight;
@@ -109,15 +110,16 @@ public:
 				{
 					int productId;
 					ss >> productId;
-					auto it = order.purchasedProducts.find(productId);
-					if (it != order.purchasedProducts.end())
-					{
-						order.purchasedProducts[productId] += 1;
-					}
-					else
-					{
-						order.purchasedProducts.insert(make_pair(productId, 1));
-					}
+					order.purchasedProducts.push_back(products[productId]);
+					//auto it = order.purchasedProducts.find(productId);
+					//if (it != order.purchasedProducts.end())
+					//{
+					//	order.purchasedProducts[productId] += 1;
+					//}
+					//else
+					//{
+					//	order.purchasedProducts.insert(make_pair(productId, 1));
+					//}
 				}
 				ss.clear();
 

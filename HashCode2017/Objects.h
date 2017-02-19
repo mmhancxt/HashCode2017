@@ -59,6 +59,12 @@ public:
 		   [productId](const Product& p) { return p.id == productId && p.status == Status::UNPROCESSED; }
 	   );
    }
+   int GetProductNumber(int productId)
+   {
+	   return std::count_if(purchasedProducts.cbegin(), purchasedProducts.cend(),
+		   [productId](const Product& p) { return p.id == productId; }
+	   );
+   }
 };
 
 enum DroneStatus

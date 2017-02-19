@@ -1,2 +1,2 @@
 delivery:
-	g++ -std=c++11 -o deliver Main.cpp
+	g++ -std=c++11 -o deliver -O3 Main.cpp

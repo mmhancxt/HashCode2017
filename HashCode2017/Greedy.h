@@ -63,8 +63,10 @@ public:
       vector<Order> orders = loader.orders;
       CalculateOrderPoints(orders);
       int current = 0;
+      return;
       while (current < loader.const_totalTurns)
       {
+         cout << "Current is " << current << endl;
          for (int i = 0 ; i < loader.const_droneNum; i++)
          {
             Drone& drone = loader.drones[i];

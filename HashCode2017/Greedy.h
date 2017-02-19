@@ -10,7 +10,7 @@ public:
 
    void CalculateOrderPoints(vector<Order>& orders)
    {
-          
+             
    }
 
    void Load(int dId, int wId, int pId, int pNb, Order& order)
@@ -35,17 +35,21 @@ public:
          for (int i = 0 ; i < loader.const_droneNum; i++)
          {
             Drone& drone = loader.drones[i];
-            CalculateOrderPoints(orders);      
-            Order& orderToDeliver = orders[0];
-            int pId = orderToDeliver.nextProductToDeliver;
-            int wId = orderToDeliver.wareHouseIdToLoad;
-            int pNb = orderToDeliver.GetUndeliveredProduct(pId);
-            int availableCap = loader.const_maxDroneLoad;
-            while (availableCap > 0)
+            if (drones.nextUsableTurn == current)
             {
-               int nb = std::min(availableCap, pNb);
-               Load(drone.id, wId, pId, pNb, orderToDeliver);
-               
+               CalculateOrderPoints(orders);      
+               Order& orderToDeliver = orders[0];
+               int pId = orderToDeliver.nextProductToDeliver;
+               int wId = orderToDeliver.wareHouseIdToLoad;
+               int pNb = orderToDeliver.GetUndeliveredProductNb(pId);
+               int availableCap = loader.const_maxDroneLoad;
+               WareHouse& wh = loader.warehouses[wId];
+
+               while (availableCap > 0)
+               {
+                  int nb = std::min(availableCap, pNb);
+                  Load(drone.id, wId, pId, pNb, orderToDeliver);
+               }
             }
          }
          current++;

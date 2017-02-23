@@ -45,13 +45,18 @@ public:
         {
             rs.push_back(i);
         }
+        int j=0;
         while (true)
         {
             if (requests.size() != 0) 
             {
-                if (requests.size() % 100 == 0) cout << requests.size() << endl;
-                Sort();
-                Request& r = requests[0];
+                if (requests.size() % 1000 == 0 || requests.size() < 1000) 
+                {
+                    cout << requests.size() << endl;
+                    Sort();
+                    j = 0;
+                }
+                Request& r = requests[j];
                 int cid = findAvailableCache(r);
                 if (cid != -1)
                 {
@@ -66,6 +71,7 @@ public:
                 requests.erase(it);
             }
             else break;
+            j++;
         }
         cout << "Start to fill" << endl;
 

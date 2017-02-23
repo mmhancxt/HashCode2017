@@ -1,10 +1,6 @@
-#include <iostream>
 #include "InputLoader.h"
 #include "Tools.h"
 #include "Utilities.h"
-using namespace std;
-
-
 
 void iterateEndPointMethod(InputLoader& loader) {
 	for (auto& endp : loader.endpoints) {
@@ -15,7 +11,7 @@ void iterateEndPointMethod(InputLoader& loader) {
 	for (auto& id : not_processed_request_ids) {
 		id = 0;
 	}
-	for (int i = 0; i < loader.endpoints.size();i++) {
+	for (int i = 0; i < loader.endpoints.size(); i++) {
 		int video_id = not_processed_request_ids[i];
 		int video_size = loader.videos[video_id];
 
@@ -24,20 +20,9 @@ void iterateEndPointMethod(InputLoader& loader) {
 		for (int j = 0; j < loader.endpoints[i].cache_latencies.size(); j++) {
 			if (loader.endpoints[i].cache_latencies[j] < min_latency) {
 				int cache_id = loader.endpoints[i].cache_ids[j];
-				int available_space = 
+				int available_space = cacheAvailableSpace(loader.caches[cache_id]);
 			}
 		}
 	}
 
-}
-
-int main(int argc, const char * argv[])
-{
-    std::cout << "Hello, HashCode!\n";
-
-    for (int i = 0; i < 10; ++i)
-    {
-        cout << Tools::GetUniformRandomNumber(0, 5) << endl;
-    }
-    return 0;
 }

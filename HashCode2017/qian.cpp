@@ -45,7 +45,7 @@ void iterateEndPointMethod(InputLoader& loader) {
 				}
 			}
 			if (min_available_cache != -1) {
-				loader.caches[min_available_cache].videos.push_back(video_id);
+				loader.caches[min_available_cache].videos.insert(video_id);
 			}
 			not_processed_request_ids[i]++;
 		}
@@ -62,8 +62,8 @@ void iterateEndPointMethod(InputLoader& loader) {
 		string str;
 		str += to_string(i);
 		str+=" ";
-		for (int j = 0; j < loader.caches[i].videos.size(); j++) {
-			str += loader.caches[i].videos[j];
+		for (auto& id : loader.caches[i].videos) {
+			str += id;
 			str += " ";
 		}
 		cout << str << endl;

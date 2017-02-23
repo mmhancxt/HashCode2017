@@ -2,6 +2,7 @@
 #include "InputLoader.h"
 #include "Tools.h"
 #include "Utilities.h"
+#include "Algo1.h"
 using namespace std;
 
 
@@ -34,6 +35,9 @@ void iterateEndPointMethod(InputLoader& loader) {
 int main(int argc, const char * argv[])
 {
     std::cout << "Hello, HashCode!\n";
+    InputLoader loader;
+    Algo algo(loader);
+    algo.Run();
 
     for (int i = 0; i < 10; ++i)
     {

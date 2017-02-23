@@ -130,9 +130,9 @@ private:
         // Videos
         vector<int> vs = {50, 50, 80, 30, 110};
         for (auto v : vs) {
-            Video video;
-            video.size = v;
-            videos.push_back(video);
+            Video vid;
+            vid.size = v;
+            videos.push_back(vid);
         }
         
         // Endpoints

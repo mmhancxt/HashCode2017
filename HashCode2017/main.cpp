@@ -10,7 +10,7 @@ using namespace std;
 
 
 void iterateEndPointMethod(InputLoader& loader) {
-	for (auto& endp : loader.endpoints) {
+	/*for (auto& endp : loader.endpoints) {
 		sort(endp.requests.begin(), endp.requests.end(), [&](Request r1, Request r2) { return r1.request_nb > r2.request_nb; });
 	}
 	vector<int> not_processed_request_ids;
@@ -30,7 +30,7 @@ void iterateEndPointMethod(InputLoader& loader) {
 				int available_space = 
 			}
 		}
-	}
+	}*/
 
 }
 

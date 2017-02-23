@@ -15,6 +15,7 @@ struct Request
     int video;
     int request_nb;
     int endpoint;
+    int points;
 };
 
 struct Cache

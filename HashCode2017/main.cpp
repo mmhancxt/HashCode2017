@@ -13,7 +13,8 @@ using namespace std;
 int main(int argc, const char * argv[])
 {
     std::cout << "Hello, HashCode!\n";
-	InputLoader loader;
+	//InputLoader loader;
+    InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\example.in");
 	iterateEndPointMethod(loader);
     //std::cout << "Hello, HashCode!\n";
 

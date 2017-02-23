@@ -38,7 +38,7 @@ void iterateEndPointMethod(InputLoader& loader) {
 			for (int j = 0; j < loader.endpoints[i].cache_latencies.size(); j++) {
 				if (loader.endpoints[i].cache_latencies[j] < min_latency) {
 					int cache_id = loader.endpoints[i].cache_ids[j];
-					int available_space = cacheAvailableSpace(loader.caches[cache_id]);
+					int available_space = cacheAvailableSpace(loader.videos, loader.caches[cache_id]);
 					if (available_space >= video_size) {
 						min_available_cache = j;
 					}

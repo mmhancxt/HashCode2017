@@ -46,6 +46,11 @@ public:
     // Load input from file
     InputLoader(const string & fileName)
     {
+        const_video_nb = 0;
+        const_endpoints_nb = 0;
+        const_request_desc = 0;
+        const_caches_nb = 0;
+        const_cache_size = 0;
         m_file.open(fileName);
         if (m_file.is_open())
         {
@@ -182,18 +187,55 @@ private:
         const_caches_nb = consts[3];
         const_cache_size = consts[4];
 
-        /*for (int i = 0; i < const_row; i++)
+        // caches
+        for (int i = 0; i < const_caches_nb; ++i)
         {
-            string line = GetLineAsString();
-            vector<int> v;
-            for (int i = 0; i < line.size(); ++i)
+            Cache cache;
+            cache.size = const_cache_size;
+            caches.push_back(cache);
+        }
+
+        // videos
+        vector<int> vs = GetLineAsVector<int>();
+        for (auto size : vs)
+        {
+            Video v; v.size = size;
+            videos.push_back(v);
+        }
+
+        // endpoints
+        for (int i = 0; i < const_endpoints_nb; ++i)
+        {
+            vector<int> lantency_cache_nb = GetLineAsVector<int>();
+            int lantency = lantency_cache_nb[0];
+            int cache_nb = lantency_cache_nb[1];
+            EndPoint endpoint;
+            int currentEndpointId = endpoints.size();
+            endpoint.data_center_lantency = lantency;
+            for (int i = 0; i < cache_nb; ++i)
             {
-                int ingredient = (line[i] == 'T' ? 1 : 0);
-                v.push_back(ingredient);
+                vector<int> cache_id_cache_lantency = GetLineAsVector<int>();
+                int cache_id = cache_id_cache_lantency[0];
+                endpoint.cache_ids.push_back(cache_id);
+                endpoint.cache_latencies.push_back(cache_id_cache_lantency[1]);
+                caches[cache_id].endpoints.push_back(currentEndpointId);
             }
-            pizza.push_back(v);
-            isTaken.push_back(vector<int>(line.size(), false));
-        }*/
+            endpoints.push_back(endpoint);
+        }
+
+        // requests
+        for (int i = 0; i < const_request_desc; ++i)
+        {
+            vector<int> request = GetLineAsVector<int>();
+            Request req;
+            req.video = request[0];
+            req.endpoint = request[1];
+            req.request_nb = request[2];
+            requests.push_back(req);
+            endpoints[request[1]].requests.push_back(requests.size() - 1);
+
+        }
+
     }
 
 private:
@@ -202,7 +244,7 @@ private:
 public:
     int const_video_nb;
     int const_endpoints_nb;
-    int const_request_desc;
+    int const_request_desc;   // request nb
     int const_caches_nb;
     int const_cache_size;
     vector<Cache> caches;

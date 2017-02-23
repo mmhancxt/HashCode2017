@@ -2,15 +2,15 @@
 
 class Algo
 {
-    Algo(InputLoader& input) : loader(input) {}
+    Algo(InputLoader& input) : 
+        loader(input),
+        requests(loader.requests),
+        caches(loader.caches),
+        endpoints(loader.endpoints)
+    {}
 
     void Sort()
     {
-        vector<Request>& requests = loader.requests;
-        vector<Cache> caches = loader.cashes;
-        vector<Video> videos = loader.videos;
-        vector<EndPoint> endpoints = loader.endpoints;
-
         for (Request& r : requests)
         {
             EndPoint& e = endpoints[r.endpoint];
@@ -31,6 +31,38 @@ class Algo
                     r1.points > r2.points;
                 });
     }
+
+    void Run()
+    {
+        Sort();
+        for (Request& r : loader.request)
+        {
+            int cid = findAvailableCache(r);
+            if (cid != -1)
+            {
+                caches[cid].videos.insert(r.video);
+            }
+        }
+    }
+
+    int findAvailableCache(Request& r)
+    {
+        EndPoint& e = endpints[r.endpoint];
+        for (int i = 0 ; i < e.cache_latencies.size(); i++)
+        {
+            int cid = e.cache_ids[i];
+            if (cacheAvailableSpace(caches[cid]) > videos[r.video].size)
+            {
+                return cid; 
+            }
+        }
+        return -1;
+    }
+
+    vector<Cache> caches;
+    vector<Request> requests;
+    vector<Video> videos;
+    vector<EndPoint> endpoints;
 
     InputLoader& loader;
 };

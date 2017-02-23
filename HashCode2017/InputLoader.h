@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <set>
 //#include <boost/algorithm/string.hpp>
 
 using namespace std;
@@ -22,7 +23,7 @@ struct Cache
 {
     int size;
     vector<int> endpoints;
-    vector<int> videos;
+    set<int> videos;
 };
 
 struct Video

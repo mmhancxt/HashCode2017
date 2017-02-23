@@ -12,8 +12,10 @@ using namespace std;
 
 int main(int argc, const char * argv[])
 {
-    std::cout << "Hello, HashCode!\n";
-	InputLoader loader;
+    //std::cout << "Hello, HashCode!\n";
+	InputLoader loader("D:\\Codes\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
+	//InputLoader loader("D:\\Codes\\HashCode2017\\HashCode2017\\input\\example.in");
+
 	iterateEndPointMethod(loader);
     //std::cout << "Hello, HashCode!\n";
 
@@ -22,9 +24,7 @@ int main(int argc, const char * argv[])
     //    cout << Tools::GetUniformRandomNumber(0, 5) << endl;
     //}
 
-    //InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\example.in");
-
-
 	cin.get();
+
     return 0;
 }

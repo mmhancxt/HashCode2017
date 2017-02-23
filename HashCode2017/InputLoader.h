@@ -21,6 +21,7 @@ struct Cache
 {
     int size;
     vector<int> endpoints;
+    vector<int> videos;
 };
 
 struct Video

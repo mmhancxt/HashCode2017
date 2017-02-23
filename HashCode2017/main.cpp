@@ -14,7 +14,7 @@ int main(int argc, const char * argv[])
 {
     std::cout << "Hello, HashCode!\n";
 	InputLoader loader;
-
+	iterateEndPointMethod(loader);
     //std::cout << "Hello, HashCode!\n";
 
     //for (int i = 0; i < 10; ++i)
@@ -23,9 +23,8 @@ int main(int argc, const char * argv[])
     //}
 
     //InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\example.in");
-    InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
 
 
-
+	cin.get();
     return 0;
 }

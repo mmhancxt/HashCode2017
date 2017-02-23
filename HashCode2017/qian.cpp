@@ -26,8 +26,9 @@ void iterateEndPointMethod(InputLoader& loader) {
 		cout << "round " << round << endl;
 		for (int i = 0; i < loader.endpoints.size(); i++) {
 			int not_processed_request_id = not_processed_request_ids[i];
-			if (not_processed_request_id == request_by_endpoint[i].size() - 1)
+			if (not_processed_request_id >= request_by_endpoint[i].size() - 1)
 				continue;
+			cout << request_by_endpoint.size() << " " << request_by_endpoint[i].size();
 			int video_id = request_by_endpoint[i][not_processed_request_id].video;
 
 			int video_size = loader.videos[video_id].size;

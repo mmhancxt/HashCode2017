@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <set>
 //#include <boost/algorithm/string.hpp>
 
 using namespace std;
@@ -22,7 +23,7 @@ struct Cache
 {
     int size;
     vector<int> endpoints;
-    vector<int> videos;
+    set<int> videos;
 };
 
 struct Video
@@ -129,9 +130,9 @@ private:
         // Videos
         vector<int> vs = {50, 50, 80, 30, 110};
         for (auto v : vs) {
-            Video v;
-            v.size = v;
-            videos.push_back(v);
+            Video vid;
+            vid.size = v;
+            videos.push_back(vid);
         }
         
         // Endpoints

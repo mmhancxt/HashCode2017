@@ -17,6 +17,7 @@ using namespace std;
 
 struct Request
 {
+    int id;
     int video;
     int request_nb;
     int endpoint;
@@ -233,6 +234,7 @@ private:
         {
             vector<int> request = GetLineAsVector<int>();
             Request req;
+            req.id = i;
             req.video = request[0];
             req.endpoint = request[1];
             req.request_nb = request[2];

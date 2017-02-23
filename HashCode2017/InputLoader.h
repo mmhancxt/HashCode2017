@@ -6,7 +6,11 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <iterator>
+
+
 #include <set>
+
 //#include <boost/algorithm/string.hpp>
 
 using namespace std;

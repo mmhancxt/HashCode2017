@@ -1,2 +1,4 @@
 video:
-	g++ -std=c++11 -o video main.cpp
+	g++ -std=c++11 -g -w -o video main.cpp
+clean:
+	rm -f video

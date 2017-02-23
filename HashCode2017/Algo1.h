@@ -2,11 +2,13 @@
 
 class Algo
 {
+public:
     Algo(InputLoader& input) : 
         loader(input),
-        requests(loader.requests),
-        caches(loader.caches),
-        endpoints(loader.endpoints)
+        requests(input.requests),
+        caches(input.caches),
+        videos(input.videos),
+        endpoints(input.endpoints)
     {}
 
     void Sort()
@@ -16,26 +18,26 @@ class Algo
             EndPoint& e = endpoints[r.endpoint];
             int Ld = e.data_center_lantency;
             int minL = Ld;
-            for (int i = 0; i < cache_latencies.size();i++)
+            for (int i = 0; i < e.cache_latencies.size();i++)
             {
-                if (cache_latencies[i] < minL)
+                if (e.cache_latencies[i] < minL)
                 {
-                    minL = cache_latencies[i];
+                    minL = e.cache_latencies[i];
                 }
             }
             r.points = r.request_nb * (Ld - minL);
         }
 
-        sort(request.begin(), request.end(), [](const Request& r1, const Request& r2)
+        sort(requests.begin(), requests.end(), [](const Request& r1, const Request& r2)
                 {
-                    r1.points > r2.points;
+                    return r1.points > r2.points;
                 });
     }
 
     void Run()
     {
         Sort();
-        for (Request& r : loader.request)
+        for (Request& r : loader.requests)
         {
             int cid = findAvailableCache(r);
             if (cid != -1)
@@ -43,15 +45,28 @@ class Algo
                 caches[cid].videos.insert(r.video);
             }
         }
+        for (int i = 0; i < caches.size() ; i++)
+        {
+            Cache& c = caches[i];
+            if (c.videos.size() > 0)
+            {
+                cout << i << " ";
+                for (auto it = c.videos.begin(); it != c.videos.end(); ++it)
+                {
+                    cout << (*it) << " ";
+                }
+                cout << endl;
+            }
+        }
     }
 
     int findAvailableCache(Request& r)
     {
-        EndPoint& e = endpints[r.endpoint];
+        EndPoint& e = endpoints[r.endpoint];
         for (int i = 0 ; i < e.cache_latencies.size(); i++)
         {
             int cid = e.cache_ids[i];
-            if (cacheAvailableSpace(caches[cid]) > videos[r.video].size)
+            if (cacheAvailableSpace(loader.videos, caches[cid]) > videos[r.video].size)
             {
                 return cid; 
             }
@@ -59,10 +74,10 @@ class Algo
         return -1;
     }
 
-    vector<Cache> caches;
-    vector<Request> requests;
-    vector<Video> videos;
-    vector<EndPoint> endpoints;
+    vector<Cache>& caches;
+    vector<Request>& requests;
+    vector<Video>& videos;
+    vector<EndPoint>& endpoints;
 
     InputLoader& loader;
 };

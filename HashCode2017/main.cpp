@@ -45,6 +45,7 @@ int main(int argc, const char * argv[])
 
     //InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\example.in");
     //InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
+    //InputLoader loader;
     InputLoader loader("/Users/Xavier/Programs/c++/HashCode2017/HashCode2017/me_at_the_zoo.in");
     Algo algo(loader);
     algo.Run();

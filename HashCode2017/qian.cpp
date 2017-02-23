@@ -13,7 +13,7 @@ void iterateEndPointMethod(InputLoader& loader) {
 	}
 	for (int i = 0; i < loader.endpoints.size(); i++) {
 		int video_id = not_processed_request_ids[i];
-		int video_size = loader.videos[video_id];
+		int video_size = loader.videos[video_id].size;
 
 		int min_latency = 9999999999;
 		int min_available_cache = -1;

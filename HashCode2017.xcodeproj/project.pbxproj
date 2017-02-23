@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E3B3C181E5F6900008471E4 /* qian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B3C161E5F6900008471E4 /* qian.cpp */; };
 		25A0FFB81E4940F500195591 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25A0FFB71E4940F500195591 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,9 @@
 		0E3B3C121E5F6039008471E4 /* InputLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputLoader.h; sourceTree = "<group>"; };
 		0E3B3C131E5F6039008471E4 /* Output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Output.h; sourceTree = "<group>"; };
 		0E3B3C141E5F6039008471E4 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		0E3B3C151E5F6900008471E4 /* Algo1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algo1.h; sourceTree = "<group>"; };
+		0E3B3C161E5F6900008471E4 /* qian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = qian.cpp; sourceTree = "<group>"; };
+		0E3B3C171E5F6900008471E4 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		25A0FFB41E4940F500195591 /* HashCode2017 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HashCode2017; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A0FFB71E4940F500195591 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +64,9 @@
 		25A0FFB61E4940F500195591 /* HashCode2017 */ = {
 			isa = PBXGroup;
 			children = (
+				0E3B3C151E5F6900008471E4 /* Algo1.h */,
+				0E3B3C161E5F6900008471E4 /* qian.cpp */,
+				0E3B3C171E5F6900008471E4 /* Utilities.h */,
 				0E3B3C121E5F6039008471E4 /* InputLoader.h */,
 				0E3B3C131E5F6039008471E4 /* Output.h */,
 				0E3B3C141E5F6039008471E4 /* Tools.h */,
@@ -124,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E3B3C181E5F6900008471E4 /* qian.cpp in Sources */,
 				25A0FFB81E4940F500195591 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -33,27 +33,40 @@ public:
 
         sort(requests.begin(), requests.end(), [](const Request& r1, const Request& r2)
                 {
-                    return r1.points > r2.points;
+                    return r1.points < r2.points;
                 });
     }
 
     void Run()
     {
-        while (requests.size() > 0)
+        vector<int> rs;
+        for (int i = 0; i < requests.size(); i++)
         {
-
+            rs.push_back(i);
         }
-
-        Sort();
-        cout << "start to fill" << endl;
-        for (Request& r : loader.requests)
+        while (rs.size() > 0)
         {
+            Sort();
+            int s = requests.size()-1;
+            Request& r = requests[s];
             int cid = findAvailableCache(r);
             if (cid != -1)
             {
                 caches[cid].videos.insert(r.video);
             }
+            requests.erase(r);
         }
+
+        //Sort();
+        //cout << "start to fill" << endl;
+        //for (Request& r : loader.requests)
+        //{
+        //    int cid = findAvailableCache(r);
+        //    if (cid != -1)
+        //    {
+        //        caches[cid].videos.insert(r.video);
+        //    }
+        //}
 
         for (int i = 0; i < caches.size() ; i++)
         {

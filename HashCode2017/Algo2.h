@@ -15,7 +15,6 @@ public:
 
     void Sort()
     {
-        cout << "start to sort " << endl;
         for (Request& r : requests)
         {
             EndPoint& e = endpoints[r.endpoint];
@@ -23,7 +22,9 @@ public:
             int minL = Ld;
             for (int i = 0; i < e.cache_latencies.size();i++)
             {
-                if (e.cache_latencies[i] < minL)
+                Cache& c = caches[e.cache_ids[i]];
+                if (cacheAvailableSpace(videos, c) > videos[r.video].size
+                 && e.cache_latencies[i] < minL)
                 {
                     minL = e.cache_latencies[i];
                 }
@@ -33,7 +34,7 @@ public:
 
         sort(requests.begin(), requests.end(), [](const Request& r1, const Request& r2)
                 {
-                    return r1.points < r2.points;
+                    return r1.points > r2.points;
                 });
     }
 
@@ -48,9 +49,9 @@ public:
         {
             if (requests.size() != 0) 
             {
+                if (requests.size() % 100 == 0) cout << requests.size() << endl;
                 Sort();
-                int s = requests.size()-1;
-                Request& r = requests[s];
+                Request& r = requests[0];
                 int cid = findAvailableCache(r);
                 if (cid != -1)
                 {

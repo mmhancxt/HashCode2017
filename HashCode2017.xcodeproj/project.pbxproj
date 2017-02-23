@@ -23,6 +23,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E3B3C121E5F6039008471E4 /* InputLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputLoader.h; sourceTree = "<group>"; };
+		0E3B3C131E5F6039008471E4 /* Output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Output.h; sourceTree = "<group>"; };
+		0E3B3C141E5F6039008471E4 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		25A0FFB41E4940F500195591 /* HashCode2017 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HashCode2017; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A0FFB71E4940F500195591 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +60,9 @@
 		25A0FFB61E4940F500195591 /* HashCode2017 */ = {
 			isa = PBXGroup;
 			children = (
+				0E3B3C121E5F6039008471E4 /* InputLoader.h */,
+				0E3B3C131E5F6039008471E4 /* Output.h */,
+				0E3B3C141E5F6039008471E4 /* Tools.h */,
 				25A0FFB71E4940F500195591 /* main.cpp */,
 			);
 			path = HashCode2017;
@@ -239,6 +245,7 @@
 				25A0FFBD1E4940F500195591 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

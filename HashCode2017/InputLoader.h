@@ -10,6 +10,33 @@
 
 using namespace std;
 
+struct Request
+{
+    int video;
+    int request_nb;
+    int endpoint;
+};
+
+struct Cache
+{
+    int size;
+    vector<int> endpoints;
+};
+
+struct Video
+{
+    int size;
+};
+
+struct EndPoint
+{
+    int data_center_lantency;
+    vector<int> cache_ids;
+    vector<int> cache_latencies;
+    vector<int> requests;
+};
+
+
 class InputLoader
 {
 public:
@@ -86,29 +113,30 @@ private:
 private:
     void Init()
     {
-        const_row = 7;
-        const_column = 6;
-        const_min_ingredient = 1;
-        const_max_cells_in_slice = 5;
-        pizza = {
-            { 1, 0, 0, 0, 1, 1, 1 },
-            { 0, 0, 0, 0, 1, 0, 0 },
-            { 1, 1, 0, 1, 1, 0, 1 },
-            { 1, 0, 0, 1, 0, 0, 0 },
-            { 1, 1, 1, 1, 1, 1, 0 },
-            { 1, 1, 1, 1, 1, 1, 0 }
-        };
+        //const_row = 7;
+        //const_column = 6;
+        //const_min_ingredient = 1;
+        //const_max_cells_in_slice = 5;
+        //pizza = {
+        //    { 1, 0, 0, 0, 1, 1, 1 },
+        //    { 0, 0, 0, 0, 1, 0, 0 },
+        //    { 1, 1, 0, 1, 1, 0, 1 },
+        //    { 1, 0, 0, 1, 0, 0, 0 },
+        //    { 1, 1, 1, 1, 1, 1, 0 },
+        //    { 1, 1, 1, 1, 1, 1, 0 }
+        //};
     }
 
     void InitFromFile()
     {
         vector<int> consts = GetLineAsVector<int>();
-        const_row = consts[0];
-        const_column = consts[1];
-        const_min_ingredient = consts[2];
-        const_max_cells_in_slice = consts[3];
+        const_video_nb = consts[0];
+        const_endpoints_nb = consts[1];
+        const_request_desc = consts[2];
+        const_caches_nb = consts[3];
+        const_cache_size = consts[4];
 
-        for (int i = 0; i < const_row; i++)
+        /*for (int i = 0; i < const_row; i++)
         {
             string line = GetLineAsString();
             vector<int> v;
@@ -119,17 +147,20 @@ private:
             }
             pizza.push_back(v);
             isTaken.push_back(vector<int>(line.size(), false));
-        }
+        }*/
     }
 
 private:
     ifstream m_file;
 
 public:
-    int const_row;
-    int const_column;
-    int const_min_ingredient;
-    int const_max_cells_in_slice;
-    vector<vector<int>> pizza;
-    vector<vector<int>> isTaken;
+    int const_video_nb;
+    int const_endpoints_nb;
+    int const_request_desc;
+    int const_caches_nb;
+    int const_cache_size;
+    vector<Cache> caches;
+    vector<Request> requests;
+    vector<Video> videos;
+    vector<EndPoint> endpoints;
 };

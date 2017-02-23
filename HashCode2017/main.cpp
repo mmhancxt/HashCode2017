@@ -4,6 +4,7 @@
 #include "InputLoader.h"
 
 #include "Utilities.h"
+#include "Algo1.h"
 using namespace std;
 
 
@@ -12,6 +13,7 @@ using namespace std;
 
 int main(int argc, const char * argv[])
 {
+<<<<<<< HEAD
     //std::cout << "Hello, HashCode!\n";
 	InputLoader loader("D:\\Codes\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
 	//InputLoader loader("D:\\Codes\\HashCode2017\\HashCode2017\\input\\example.in");
@@ -26,5 +28,12 @@ int main(int argc, const char * argv[])
 
 	cin.get();
 
+=======
+    //InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
+    //InputLoader loader;
+    InputLoader loader(argv[1]);
+    Algo algo(loader);
+    algo.Run();
+>>>>>>> 5c9ca5ab3233a9ae9b469a414c7a15bf9fcfec40
     return 0;
 }

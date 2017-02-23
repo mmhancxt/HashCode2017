@@ -3,6 +3,7 @@
 
 void iterateEndPointMethod(InputLoader& loader);
 
+
 inline int cacheAvailableSpace(const vector<Video> & videos, const Cache& cache) {
 	int sum = 0;
     for (auto it = cache.videos.begin(); it != cache.videos.end(); ++it)

@@ -1,4 +1,5 @@
 #include "InputLoader.h"
+#include <fstream>
 
 class Algo
 {
@@ -8,11 +9,13 @@ public:
         requests(input.requests),
         caches(input.caches),
         videos(input.videos),
-        endpoints(input.endpoints)
+        endpoints(input.endpoints),
+        ofs("outputs.txt")
     {}
 
     void Sort()
     {
+        cout << "start to sort " << endl;
         for (Request& r : requests)
         {
             EndPoint& e = endpoints[r.endpoint];
@@ -36,7 +39,13 @@ public:
 
     void Run()
     {
+        while (requests.size() > 0)
+        {
+
+        }
+
         Sort();
+        cout << "start to fill" << endl;
         for (Request& r : loader.requests)
         {
             int cid = findAvailableCache(r);
@@ -45,19 +54,21 @@ public:
                 caches[cid].videos.insert(r.video);
             }
         }
+
         for (int i = 0; i < caches.size() ; i++)
         {
             Cache& c = caches[i];
             if (c.videos.size() > 0)
             {
-                cout << i << " ";
+                ofs << i << " ";
                 for (auto it = c.videos.begin(); it != c.videos.end(); ++it)
                 {
-                    cout << (*it) << " ";
+                    ofs << (*it) << " ";
                 }
-                cout << endl;
+                ofs << endl;
             }
         }
+        ofs.close();
     }
 
     int findAvailableCache(Request& r)
@@ -78,6 +89,7 @@ public:
     vector<Request>& requests;
     vector<Video>& videos;
     vector<EndPoint>& endpoints;
-
+    
+    ofstream ofs;
     InputLoader& loader;
 };

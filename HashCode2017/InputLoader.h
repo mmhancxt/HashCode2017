@@ -21,6 +21,7 @@ struct Request
     int request_nb;
     int endpoint;
     int points;
+    bool treated;
 };
 
 struct Cache
@@ -235,6 +236,7 @@ private:
             req.video = request[0];
             req.endpoint = request[1];
             req.request_nb = request[2];
+            req.treated = false;
             requests.push_back(req);
             endpoints[request[1]].requests.push_back(requests.size() - 1);
 

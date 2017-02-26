@@ -27,6 +27,7 @@ struct Request
 
 struct Cache
 {
+    int id;
     int size;
     vector<int> endpoints;
     set<int> videos;
@@ -34,11 +35,13 @@ struct Cache
 
 struct Video
 {
+    int id;
     int size;
 };
 
 struct EndPoint
 {
+    int id;
     int data_center_lantency;
     vector<int> cache_ids;
     vector<int> cache_latencies;
@@ -197,16 +200,19 @@ private:
         for (int i = 0; i < const_caches_nb; ++i)
         {
             Cache cache;
+            cache.id = i;
             cache.size = const_cache_size;
             caches.push_back(cache);
         }
 
         // videos
         vector<int> vs = GetLineAsVector<int>();
-        for (auto size : vs)
+        for (int i = 0; i < vs.size(); ++i)
         {
-            Video v; v.size = size;
-            videos.push_back(v);
+            Video vid;
+            vid.size = vs[i];
+            vid.id = i;
+            videos.push_back(vid);
         }
 
         // endpoints
@@ -216,6 +222,7 @@ private:
             int lantency = lantency_cache_nb[0];
             int cache_nb = lantency_cache_nb[1];
             EndPoint endpoint;
+            endpoint.id = i;
             int currentEndpointId = endpoints.size();
             endpoint.data_center_lantency = lantency;
             for (int i = 0; i < cache_nb; ++i)

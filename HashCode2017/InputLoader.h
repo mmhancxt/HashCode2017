@@ -7,46 +7,11 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
-
-
 #include <set>
 
-//#include <boost/algorithm/string.hpp>
+#include "Objects.h"
 
 using namespace std;
-
-struct Request
-{
-    int id;
-    int video;
-    int request_nb;
-    int endpoint;
-    int points;
-    bool treated;
-};
-
-struct Cache
-{
-    int id;
-    int size;
-    vector<int> endpoints;
-    set<int> videos;
-};
-
-struct Video
-{
-    int id;
-    int size;
-};
-
-struct EndPoint
-{
-    int id;
-    int data_center_lantency;
-    vector<int> cache_ids;
-    vector<int> cache_latencies;
-    vector<int> requests;
-};
 
 
 class InputLoader
@@ -57,7 +22,7 @@ public:
     {
         const_video_nb = 0;
         const_endpoints_nb = 0;
-        const_request_desc = 0;
+        const_request_nb = 0;
         const_caches_nb = 0;
         const_cache_size = 0;
         m_file.open(fileName);
@@ -130,60 +95,60 @@ private:
 private:
     void Init()
     {
-        const_video_nb = 5;
-        const_endpoints_nb = 2;
-        const_request_desc = 4;
-        const_caches_nb = 3;
-        const_cache_size = 100;
-        
-        // Videos
-        vector<int> vs = {50, 50, 80, 30, 110};
-        for (auto v : vs) {
-            Video vid;
-            vid.size = v;
-            videos.push_back(vid);
-        }
-        
-        // Endpoints
-        EndPoint e1;
-        e1.data_center_lantency = 1000;
-        for (int i = 0; i < 3; ++i) {
-            e1.cache_ids.push_back(i);
-        }
-        e1.cache_latencies.push_back(100);
-        e1.cache_latencies.push_back(300);
-        e1.cache_latencies.push_back(200);
-        
-        EndPoint e2;
-        e2.data_center_lantency = 500;
-        
-        endpoints.push_back(e1);
-        endpoints.push_back(e2);
-        
-        // Requests
-        Request r1;
-        r1.video = 3;
-        r1.endpoint = 0;
-        r1.request_nb = 1500;
-        requests.push_back(r1);
-        
-        Request r2;
-        r2.video = 0;
-        r2.endpoint = 1;
-        r2.request_nb = 1000;
-        requests.push_back(r2);
-        
-        Request r3;
-        r3.video = 4;
-        r3.endpoint = 0;
-        r3.request_nb = 500;
-        requests.push_back(r3);
-        
-        Request r4;
-        r4.video = 1;
-        r4.endpoint = 0;
-        r4.request_nb = 1000;
-        requests.push_back(r4);
+//        const_video_nb = 5;
+//        const_endpoints_nb = 2;
+//        const_request_nb = 4;
+//        const_caches_nb = 3;
+//        const_cache_size = 100;
+//
+//        // Videos
+//        vector<int> vs = {50, 50, 80, 30, 110};
+//        for (auto v : vs) {
+//            Video vid;
+//            vid.size = v;
+//            videos.push_back(vid);
+//        }
+//
+//        // Endpoints
+//        EndPoint e1;
+//        e1.data_center_lantency = 1000;
+//        for (int i = 0; i < 3; ++i) {
+//            e1.cache_ids.push_back(i);
+//        }
+//        e1.cache_latencies.push_back(100);
+//        e1.cache_latencies.push_back(300);
+//        e1.cache_latencies.push_back(200);
+//
+//        EndPoint e2;
+//        e2.data_center_lantency = 500;
+//
+//        endpoints.push_back(e1);
+//        endpoints.push_back(e2);
+//
+//        // Requests
+//        Request r1;
+//        r1.video = 3;
+//        r1.endpoint = 0;
+//        r1.request_nb = 1500;
+//        requests.push_back(r1);
+//
+//        Request r2;
+//        r2.video = 0;
+//        r2.endpoint = 1;
+//        r2.request_nb = 1000;
+//        requests.push_back(r2);
+//
+//        Request r3;
+//        r3.video = 4;
+//        r3.endpoint = 0;
+//        r3.request_nb = 500;
+//        requests.push_back(r3);
+//
+//        Request r4;
+//        r4.video = 1;
+//        r4.endpoint = 0;
+//        r4.request_nb = 1000;
+//        requests.push_back(r4);
         
     }
 
@@ -192,27 +157,27 @@ private:
         vector<int> consts = GetLineAsVector<int>();
         const_video_nb = consts[0];
         const_endpoints_nb = consts[1];
-        const_request_desc = consts[2];
+        const_request_nb = consts[2];
         const_caches_nb = consts[3];
         const_cache_size = consts[4];
 
         // caches
         for (int i = 0; i < const_caches_nb; ++i)
         {
-            Cache cache;
-            cache.id = i;
-            cache.size = const_cache_size;
-            caches.push_back(cache);
+            Cache* pCache = new Cache;
+            pCache->id = i;
+            pCache->size = const_cache_size;
+            caches.push_back(pCache);
         }
 
         // videos
         vector<int> vs = GetLineAsVector<int>();
         for (int i = 0; i < vs.size(); ++i)
         {
-            Video vid;
-            vid.size = vs[i];
-            vid.id = i;
-            videos.push_back(vid);
+            Video* pVideo = new Video;
+            pVideo->id = i;
+            pVideo->size = vs[i];
+            videos.push_back(pVideo);
         }
 
         // endpoints
@@ -221,33 +186,36 @@ private:
             vector<int> lantency_cache_nb = GetLineAsVector<int>();
             int lantency = lantency_cache_nb[0];
             int cache_nb = lantency_cache_nb[1];
-            EndPoint endpoint;
-            endpoint.id = i;
+            EndPoint* pEndpoint = new EndPoint;
+            pEndpoint->id = i;
             int currentEndpointId = endpoints.size();
-            endpoint.data_center_lantency = lantency;
+            pEndpoint->data_center_lantency = lantency;
             for (int i = 0; i < cache_nb; ++i)
             {
                 vector<int> cache_id_cache_lantency = GetLineAsVector<int>();
                 int cache_id = cache_id_cache_lantency[0];
-                endpoint.cache_ids.push_back(cache_id);
-                endpoint.cache_latencies.push_back(cache_id_cache_lantency[1]);
-                caches[cache_id].endpoints.push_back(currentEndpointId);
+                int cache_lantency = cache_id_cache_lantency[1];
+                auto * pCache = caches[cache_id];
+                pEndpoint->caches.push_back(pCache);
+                pEndpoint->cacheId2Lantency.insert(make_pair(cache_id, cache_lantency));
+                pCache->endpoints.push_back(pEndpoint);
+                pCache->endpointId2Lantency.insert(make_pair(pEndpoint->id, cache_lantency));
             }
-            endpoints.push_back(endpoint);
+            endpoints.push_back(pEndpoint);
         }
 
         // requests
-        for (int i = 0; i < const_request_desc; ++i)
+        for (int i = 0; i < const_request_nb; ++i)
         {
             vector<int> request = GetLineAsVector<int>();
-            Request req;
-            req.id = i;
-            req.video = request[0];
-            req.endpoint = request[1];
-            req.request_nb = request[2];
-            req.treated = false;
-            requests.push_back(req);
-            endpoints[request[1]].requests.push_back(requests.size() - 1);
+            Request* pReq = new Request;
+            pReq->id = i;
+            pReq->pVideo = videos[request[0]];
+            pReq->pEndPoint = endpoints[request[1]];
+            pReq->request_nb = request[2];
+            pReq->treated = false;
+            requests.push_back(pReq);
+            endpoints[request[1]]->requests.push_back(pReq);
 
         }
 
@@ -259,11 +227,11 @@ private:
 public:
     int const_video_nb;
     int const_endpoints_nb;
-    int const_request_desc;   // request nb
+    int const_request_nb;   // request nb
     int const_caches_nb;
     int const_cache_size;
-    vector<Cache> caches;
-    vector<Request> requests;
-    vector<Video> videos;
-    vector<EndPoint> endpoints;
+    vector<Cache*> caches;
+    vector<Request*> requests;
+    vector<Video*> videos;
+    vector<EndPoint*> endpoints;
 };

@@ -1,40 +1,42 @@
 #include <iostream>
 #include "InputLoader.h"
-#include "Tools.h"
-#include "InputLoader.h"
+#include "Algo.h"
 
-#include "Utilities.h"
-#include "Algo2.h"
 using namespace std;
-
-
-
-
 
 int main(int argc, const char * argv[])
 {
-    //InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
-    //InputLoader loader;
-    InputLoader loader(argv[1]);
-    Algo algo(loader);
-    algo.Run();
-    //std::cout << "Hello, HashCode!\n";
-	//InputLoader loader("D:\\Codes\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
-	//InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\me_at_the_zoo.in");
-	//InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\trending_today.in");
-	//InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\kittens.in");
-	//InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\videos_worth_spreading.in");
-	//InputLoader loader("C:\\HashCode2017\\HashCode2017\\input\\example.in");
+    std::map<std::string, std::string> inputOutputs
+    {
+            {
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/input/me_at_the_zoo.in",
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/output/me_at_the_zoo.out"
+            }
+            ,
+            {
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/input/trending_today.in",
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/output/trending_today.out"
+            }
+            ,
+            {
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/input/kittens.in",
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/output/kittens.out"
+            }
+            ,
+            {
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/input/videos_worth_spreading.in",
+                    "/home/zhi/workspace/HashCode2017/HashCode2017/output/videos_worth_spreading.out"
+            }
 
-	//iterateEndPointMethod(loader);
-    //std::cout << "Hello, HashCode!\n";
+    };
 
-    //for (int i = 0; i < 10; ++i)
-    //{
-    //    cout << Tools::GetUniformRandomNumber(0, 5) << endl;
-    //}
 
-	//cin.get();
+    for(const auto inputOutput : inputOutputs)
+    {
+        InputLoader loader(inputOutput.first);
+        Algo algo(loader, inputOutput.second);
+        algo.Run();
+    }
 
     return 0;
 }

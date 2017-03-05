@@ -1,6 +1,7 @@
 #include <iostream>
 #include "InputLoader.h"
 #include "Algo.h"
+#include "KnapsackAlgo.h"
 
 using namespace std;
 
@@ -34,7 +35,8 @@ int main(int argc, const char * argv[])
     for(const auto inputOutput : inputOutputs)
     {
         InputLoader loader(inputOutput.first);
-        Algo algo(loader, inputOutput.second);
+        //Algo algo(loader, inputOutput.second);
+        KnapsackAlgo algo(loader, inputOutput.second);
         algo.Run();
     }
 

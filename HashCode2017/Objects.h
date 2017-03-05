@@ -12,6 +12,7 @@ using namespace std;
 
 
 struct EndPoint;
+struct Cache;
 
 
 struct Video
@@ -24,11 +25,22 @@ struct Request
 {
     int id;
     int request_nb;
-    //int endpoint;
     Video* pVideo;
     EndPoint* pEndPoint;
-    bool treated = false;
+    bool videoInCache = false;
 };
+
+struct EndPoint
+{
+    int id;
+    int data_center_latency;
+    vector<Cache*> caches;
+    vector<Request*> requests;
+    map<int, int> cacheId2Lantency;
+
+    vector<Request*> requestsNotInCache;
+};
+
 
 struct Cache
 {
@@ -37,14 +49,34 @@ struct Cache
     vector<EndPoint*> endpoints;
     vector<const Video*> videos;
     map<int, int> endpointId2Lantency;
+    int availableSize;
+    int potentialCharge;
 
-    int getAvaiablesize() const
+    void pushBackVideo(const Video* pVideo)
     {
-        int consumedSize = std::accumulate(videos.begin(), videos.end(), 0, [](int consumedSize, const Video* pVideo) { return consumedSize+pVideo->size; });
-        return size - consumedSize;
+        videos.push_back(pVideo);
+        availableSize -= pVideo->size;
     }
 
-    bool hasEnoughSpaceForVideo(const Video* pVideo) const
+    void updatePotentialCharge()
+    {
+        for(const EndPoint* pEndpoint : endpoints)
+        {
+            for(const Request* pReq : pEndpoint->requests)
+            {
+                potentialCharge += pReq->request_nb;
+            }
+        }
+    }
+
+    inline int getAvaiablesize() const
+    {
+        return availableSize;
+        //int consumedSize = std::accumulate(videos.begin(), videos.end(), 0, [](int consumedSize, const Video* pVideo) { return consumedSize+pVideo->size; });
+        //return size - consumedSize;
+    }
+
+    inline bool hasEnoughSpaceForVideo(const Video* pVideo) const
     {
         return getAvaiablesize() >= pVideo->size;
     }
@@ -52,13 +84,6 @@ struct Cache
 };
 
 
-struct EndPoint
-{
-    int id;
-    int data_center_lantency;
-    vector<Cache*> caches;
-    vector<Request*> requests;
-    map<int, int> cacheId2Lantency;
-};
+
 
 #endif //HASHCODE2017_OBJECTS_H

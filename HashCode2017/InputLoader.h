@@ -111,7 +111,7 @@ private:
 //
 //        // Endpoints
 //        EndPoint e1;
-//        e1.data_center_lantency = 1000;
+//        e1.data_center_latency = 1000;
 //        for (int i = 0; i < 3; ++i) {
 //            e1.cache_ids.push_back(i);
 //        }
@@ -120,7 +120,7 @@ private:
 //        e1.cache_latencies.push_back(200);
 //
 //        EndPoint e2;
-//        e2.data_center_lantency = 500;
+//        e2.data_center_latency = 500;
 //
 //        endpoints.push_back(e1);
 //        endpoints.push_back(e2);
@@ -167,6 +167,7 @@ private:
             Cache* pCache = new Cache;
             pCache->id = i;
             pCache->size = const_cache_size;
+            pCache->availableSize = const_cache_size;
             caches.push_back(pCache);
         }
 
@@ -189,7 +190,7 @@ private:
             EndPoint* pEndpoint = new EndPoint;
             pEndpoint->id = i;
             int currentEndpointId = endpoints.size();
-            pEndpoint->data_center_lantency = lantency;
+            pEndpoint->data_center_latency = lantency;
             for (int i = 0; i < cache_nb; ++i)
             {
                 vector<int> cache_id_cache_lantency = GetLineAsVector<int>();
@@ -213,12 +214,24 @@ private:
             pReq->pVideo = videos[request[0]];
             pReq->pEndPoint = endpoints[request[1]];
             pReq->request_nb = request[2];
-            pReq->treated = false;
+            pReq->videoInCache = false;
             requests.push_back(pReq);
             endpoints[request[1]]->requests.push_back(pReq);
-
         }
 
+        CalculateStatistics();
+
+    }
+
+private:
+    void CalculateStatistics()
+    {
+        total_cache_size = const_cache_size * const_caches_nb;
+        total_video_size = std::accumulate(videos.cbegin(), videos.cend(), 0, [](int size, const Video * pVideo) { return size + pVideo->size; } );
+        for(Cache* pCache: caches)
+        {
+            pCache->updatePotentialCharge();
+        }
     }
 
 private:
@@ -234,4 +247,8 @@ public:
     vector<Request*> requests;
     vector<Video*> videos;
     vector<EndPoint*> endpoints;
+
+    int total_cache_size;
+    int total_video_size;
+
 };

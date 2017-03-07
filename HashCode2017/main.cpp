@@ -2,6 +2,7 @@
 #include "InputLoader.h"
 #include "Algo.h"
 #include "KnapsackAlgo.h"
+#include "ScoreCalculator.h"
 
 using namespace std;
 
@@ -34,11 +35,21 @@ int main(int argc, const char * argv[])
 
     for(const auto inputOutput : inputOutputs)
     {
-        InputLoader loader(inputOutput.first);
-        //Algo algo(loader, inputOutput.second);
-        KnapsackAlgo algo(loader, inputOutput.second);
-        algo.Run();
+//        InputLoader loader(inputOutput.first);
+//        loader.Load();
+//        Algo algo(loader, inputOutput.second);
+//        //KnapsackAlgo algo(loader, inputOutput.second);
+//        algo.Run();
+        ScoreCalculator scoreCalculator(inputOutput.first, inputOutput.second);
+        scoreCalculator.Load();
+        scoreCalculator.Calculate();
     }
+
+
+
+
+
+
 
     return 0;
 }

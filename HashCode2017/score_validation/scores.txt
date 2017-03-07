@@ -1,0 +1,4 @@
+file: /home/zhi/workspace/HashCode2017/HashCode2017/output/kittens.out, totalReducedLatency: 6.03704e+11, totalReq: 1.00024e+09, score: 603558
+file: /home/zhi/workspace/HashCode2017/HashCode2017/output/me_at_the_zoo.out, totalReducedLatency: 2.45674e+07, totalReq: 53311, score: 460833
+file: /home/zhi/workspace/HashCode2017/HashCode2017/output/trending_today.out, totalReducedLatency: 2.50183e+11, totalReq: 5.00511e+08, score: 499855
+file: /home/zhi/workspace/HashCode2017/HashCode2017/output/videos_worth_spreading.out, totalReducedLatency: 1.66553e+11, totalReq: 4.99687e+08, score: 333315
